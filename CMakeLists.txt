@@ -1,0 +1,7 @@
+ cmake_minimum_required(VERSION 3.16)
+project(binary_protocol_parser LANGUAGES CXX) 
+set(CMAKE_CXX_STANDARD 17)
+add_library(parser src/parser.cpp)
+target_include_directories(parser PUBLIC include)
+add_executable(run_streams tests/run_streams.cpp)
+target_link_libraries(run_streams PRIVATE parser)
