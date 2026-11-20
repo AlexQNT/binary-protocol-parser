@@ -1,0 +1,10 @@
+name: ci
+on: push
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cmake -S . -B build -DSANITIZERS=address,undefined
+      - run: cmake --build build
+      - run: ./build/run_streams
