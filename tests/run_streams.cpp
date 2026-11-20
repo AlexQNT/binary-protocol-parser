@@ -55,6 +55,20 @@ void check(int& failures, const char* label, const std::vector<std::uint8_t>& st
     check(failures, "F3", {0xAA, 0x55, 0x00, 0x10, 0x20, 0x30, 0x40, 0x44}, 0);
     check(failures, "F4", {0xAA, 0x55, 0x05, 0x10, 0x20, 0x30, 0x40, 0x44}, 0);
     check(failures, "F7", {0xAA, 0x55, 0x04, 0x10, 0x20, 0x31, 0x40, 0x45}, 1);
+    std::vector<std::uint8_t> s2 = {0xAA, 0x55, 0x10};
+    s2.insert(s2.end(), 16, 0x01);
+    s2.push_back(0x10);
+    check(failures, "L2", s2, 1);
+
+    std::vector<std::uint8_t> s3 = {0xAA, 0x55, 0x10};
+    s3.insert(s3.end(), 16, 0x01);
+    s3.push_back(0x11);
+    check(failures, "L3", s3, 0);
+
+    std::vector<std::uint8_t> s4 = {0xAA, 0x55, 0x11};
+    s4.insert(s4.end(), 17, 0x01);
+    s4.push_back(0x10);
+    check(failures, "L4", s4, 0);
     std::cout << failures << " failed\n";
     if (failures == 0) {
         return 0;
