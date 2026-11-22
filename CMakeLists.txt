@@ -10,3 +10,6 @@ add_library(parser src/parser.cpp)
 target_include_directories(parser PUBLIC include)
 add_executable(run_streams tests/run_streams.cpp)
 target_link_libraries(run_streams PRIVATE parser)
+
+add_executable(pair_flips tests/pair_flips.cpp)
+target_link_libraries(pair_flips PRIVATE parser)
