@@ -6,6 +6,12 @@ if(SANITIZERS)
     add_compile_options(-fsanitize=${SANITIZERS} -fno-sanitize-recover=all -fno-omit-frame-pointer)
     add_link_options(-fsanitize=${SANITIZERS})
 endif()
+
+option(USE_CRC8 "Use CRC-8 instead of XOR as the check byte" OFF)
+if(USE_CRC8)
+    add_compile_definitions(USE_CRC8)
+endif()
+
 add_library(parser src/parser.cpp)
 target_include_directories(parser PUBLIC include)
 add_executable(run_streams tests/run_streams.cpp)

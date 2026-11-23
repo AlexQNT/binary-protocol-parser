@@ -18,3 +18,4 @@ struct Parser {
 
 enum class FeedResult{Pending,Packet, Rejected};
 FeedResult feed(Parser& parser, std::uint8_t byte);
+std::uint8_t check_update(std::uint8_t check, std::uint8_t byte);
