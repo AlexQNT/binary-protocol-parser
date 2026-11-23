@@ -17,8 +17,7 @@ int run(const std::vector<std::uint8_t>& stream) {
 }
 
 int main() {
-    std::vector<std::uint8_t> good = {0xAA, 0x55, 0x01, 0x05, 0x04};
-    std::size_t total_bits = good.size() * 8;
+std::vector<std::uint8_t> good = {0xAA, 0x55, 0x04, 0x10, 0x20, 0x30, 0x40, 0x44};    std::size_t total_bits = good.size() * 8;
     int pairs = 0;
     int accepted = 0;
     for (std::size_t a = 16; a < total_bits; ++a) {
