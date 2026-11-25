@@ -41,7 +41,7 @@ The one CRC-8 accepts is bit 2 of the length plus bit 4 of the first data byte. 
 A packet that ends early can swallow the good packet behind it (stream H in the tests).
 
 I only tested double flips on one packet size and one polynomial. The tests and CI use XOR, and I checked CRC-8 by hand.
-
+The soak test is 30 seconds on one USB cable, so it says little about a noisy link.
 
 
 ## Build and run
@@ -51,3 +51,11 @@ cmake --build build
 ./build/run_streams
 ```
 For the CRC-8 build: cmake -S . -B build/crc8 -DUSE_CRC8=ON, then build it and run ./build/crc8/pair_flips.
+
+
+
+## Soak test
+
+I made an ESP32 send a packet every 10 ms over USB serial at 115200 baud: AA 55, length 16, a 16-byte payload with a counter, and the XOR check byte. I recorded 30 seconds (3379 packets, 67584 bytes) and ran the file through the parser with decode.cpp. All 3379 packets were accepted and none were rejected. With no errors in about 540,000 bits, the rule of three puts the bit-error rate below roughly 5.5e-6 at 95 percent confidence.
+
+To check that the decoder actually counts errors, I damaged a copy of the recording. Changing a payload byte gave one rejected packet. Changing a start marker byte made one packet disappear without a rejection, so a lower good count is also a sign of damage.

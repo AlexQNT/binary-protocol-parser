@@ -19,3 +19,6 @@ target_link_libraries(run_streams PRIVATE parser)
 
 add_executable(pair_flips tests/pair_flips.cpp)
 target_link_libraries(pair_flips PRIVATE parser)
+
+add_executable(decode soak/decode.cpp)
+target_link_libraries(decode PRIVATE parser)
