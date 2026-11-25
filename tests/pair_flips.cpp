@@ -34,6 +34,7 @@ int main() {
             bad[b / 8] ^= static_cast<std::uint8_t>(1 << (b % 8));
             ++pairs;
             if (run(bad) == 1) {
+		std::cout << "accepted pair: " << a << " " << b << '\n';
                 ++accepted;
             }
         }
